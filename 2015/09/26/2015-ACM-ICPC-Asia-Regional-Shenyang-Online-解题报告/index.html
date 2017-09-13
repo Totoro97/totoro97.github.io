@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ACM,解题报告," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="A Traversal目前还没看懂题解．看了叉姐的解法，他的挺好懂的．  题目其实是求 n 个点的，度是 2 的生成子图的数量。设 f(i,mask) 表示考虑了前 i 个点，其中 [i−p−2,i−1] 的度序列是 mask，很明显，mask 是一个 (p+2) 位的 3 进制数。转移就是枚举 i 往前面哪些点连边，复杂度是 $100×3^{11}×3^2$。  B Best Solver题目大">
+<meta name="keywords" content="ACM,解题报告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2015 ACM&#x2F;ICPC Asia Regional Shenyang Online 解题报告">
+<meta property="og:url" content="http://yoursite.com/2015/09/26/2015-ACM-ICPC-Asia-Regional-Shenyang-Online-解题报告/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="A Traversal目前还没看懂题解．看了叉姐的解法，他的挺好懂的．  题目其实是求 n 个点的，度是 2 的生成子图的数量。设 f(i,mask) 表示考虑了前 i 个点，其中 [i−p−2,i−1] 的度序列是 mask，很明显，mask 是一个 (p+2) 位的 3 进制数。转移就是枚举 i 往前面哪些点连边，复杂度是 $100×3^{11}×3^2$。  B Best Solver题目大">
+<meta property="og:updated_time" content="2016-04-02T05:18:24.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2015 ACM&#x2F;ICPC Asia Regional Shenyang Online 解题报告">
+<meta name="twitter:description" content="A Traversal目前还没看懂题解．看了叉姐的解法，他的挺好懂的．  题目其实是求 n 个点的，度是 2 的生成子图的数量。设 f(i,mask) 表示考虑了前 i 个点，其中 [i−p−2,i−1] 的度序列是 mask，很明显，mask 是一个 (p+2) 位的 3 进制数。转移就是枚举 i 往前面哪些点连边，复杂度是 $100×3^{11}×3^2$。  B Best Solver题目大">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/09/26/2015-ACM-ICPC-Asia-Regional-Shenyang-Online-解题报告/"/>
+
+
+
+
+
+  <title>2015 ACM/ICPC Asia Regional Shenyang Online 解题报告 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/09/26/2015-ACM-ICPC-Asia-Regional-Shenyang-Online-解题报告/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2015 ACM/ICPC Asia Regional Shenyang Online 解题报告</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-26T23:31:30+08:00">
+                2015-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>A Traversal<br><del>目前还没看懂题解．</del><br>看了叉姐的解法，他的挺好懂的．</p>
+<blockquote>
+<p>题目其实是求 n 个点的，度是 2 的生成子图的数量。<br>设 f(i,mask) 表示考虑了前 i 个点，其中 [i−p−2,i−1] 的度序列是 mask，很明显，mask 是一个 (p+2) 位的 3 进制数。转移就是枚举 i 往前面哪些点连边，复杂度是 $100×3^{11}×3^2$。</p>
+</blockquote>
+<p>B Best Solver<br>题目大意:求 ${(5+2 \sqrt{6})}^{1+2^x}$．<br>其中 x &lt;= 2^31;<br>首先可以使用矩阵乘法(这个竟然一开始没想到)<br>然后就是找循环节的问题．．这玩意是玄学．<br>(其实我是嘴巴出来的)</p>
+<p>C Minimum Cut<br>题目大意:给你一棵树，以非树边，询问一种只割掉一条树边的割边方案，使得割掉的边数最少．<br>跨越树边的边都要割，相当于在树边上+1.<br>这个无脑一点可以熟练剖分＋线段树维护．<br>不过简单一点的方法是可以打标记，类似于前缀和的方法．</p>
+<p>D Dividing This Product<br>题目大意:求小于等于n的所有质数的乘积<br>详见: <a href="http://talk.icpc-camp.org/d/48-2015-d-dividing-this-product/14" target="_blank" rel="external">http://talk.icpc-camp.org/d/48-2015-d-dividing-this-product/14</a></p>
+<p>E Excited Database<br>题目大意：给出矩阵，初始值为零，两种操作，一是给一段连续的对角线区域加上一，二是询问某一子矩形内部元素和．<br>感觉是挺巧妙的题目．<br>对对角线建线段树．维护$\sum{A_i}$和$\sum{A_i \times i}$<br>利用这两个维护的信息就可以对子矩形求和了．</p>
+<p>F Fang Fang<br>签到题，不多说</p>
+<p>G Matches Puzzle Game<br>题目大意：<br>问恰好用$n$根火柴棍能拼出形如$A - B = C$的等式的方案数．<br>DP.<br>一开始想到用直接减法DP，敲完后发现细节有点多，弃掉了．<br>移项改成加法，可以很自然地列出状态和方程．</p>
+<p>H　Hold Your Hand<br>题目大意:给出$n$个8-bit串，再给出$m$个咒语，每个咒语对应一个前缀或后缀$S_i$，使用此咒语时能将所有前缀(后缀)为$S_i$的串消灭，而且有一定的代价．<br>求将所有串消灭的最小代价．<br>神奇的网络流<br>每个要么被前缀咒语干掉，要么被后缀咒语干掉，联想到最小割．<br>对前缀咒语建trie,后缀反向建trie，同时建网络流图，流量YY一下就知道了．<br>对于每个串，从前缀trie的对应点向后缀trie中的对应点建一条流量为INF的边．<br>最大流即为答案．</p>
+<p>I Stability<br>题目大意:一张图，两种操作，一是删边，二是给定a,b，询问有多少个点是a,b的路径中必须经过的．保证总是连通图．<br>看到修改操作真有删除就很容易想到倒着搞．<br>因为给定的图总是连通图，不妨一开始就是一颗树，那么删边变为加边．<br>加边带来的影响就是跨越的点不再是必经的点．<br>然后就是树上的维护问题啦，一开始的点初始值都为一，操作就是把某一条链上的权值都变为零．<br>树链剖分＋线段树可以搞．</p>
+<p>J Jesus Is Here<br>算是签到题</p>
+<p>K Poker<br>题目大意:给出不多于8个值不超过13的正整数，问有多少种不同使用给定数字的后缀表达式使得计算的值为$Q$<br>其实很好奇为什么这道题当场做出来的人很少<br>官解给的是搜索，但是我没有想明白什么样的搜法可以解决交换算两次的问题<br>只有8个,状压DP:$f[st][val]$，st表示数字的使用状态，val表示当前计算出来的值．<br>转移使用快速枚举子集的技巧．</p>
+<p>L Largest Point<br>签到题</p>
+<p>M Manors<br>题目大意:有m个人，每个人对花园上的任意一点都会有权值，权值由给定公式算出，权值最高者占领此地．<br>问每个人占领的面积．<br>把式子划一划，发现两个人之间会有一条分界的直线．<br>然后就是半平面交啦．</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ACM/" rel="tag"># ACM</a>
+          
+            <a href="/tags/解题报告/" rel="tag"># 解题报告</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/27/CodeForces-313-解题报告/" rel="next" title="CodeForces_#313_解题报告">
+                <i class="fa fa-chevron-left"></i> CodeForces_#313_解题报告
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/03/2015-ACM-ICPC-Asia-Regional-Shanghai-Online-解题报告/" rel="prev" title="2015 ACM/ICPC Asia Regional Shanghai Online 解题报告">
+                2015 ACM/ICPC Asia Regional Shanghai Online 解题报告 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">John Doe</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

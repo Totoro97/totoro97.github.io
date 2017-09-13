@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ACM," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="有事没事更一发(要是没有寒假作业我会堕落至死) CODE (恩。。。本文章一开始是叫寒假作业的。。。)(然后寒假已经过去了。。。。然而我并没有做多少)(所以还是打算继续做。。。。)(然后改名叫ASC)  ASC7 A构造水题0 0…..  ASC7 B无脑直接上线段树，另外吐槽为什么前面交了几发都是MLE，过几个小时交竟然就好了。  ASC7 C关键是找到$a$,$b$对应的$a+b$hash可以">
+<meta name="keywords" content="ACM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASC">
+<meta property="og:url" content="http://yoursite.com/2016/01/19/ASC/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="有事没事更一发(要是没有寒假作业我会堕落至死) CODE (恩。。。本文章一开始是叫寒假作业的。。。)(然后寒假已经过去了。。。。然而我并没有做多少)(所以还是打算继续做。。。。)(然后改名叫ASC)  ASC7 A构造水题0 0…..  ASC7 B无脑直接上线段树，另外吐槽为什么前面交了几发都是MLE，过几个小时交竟然就好了。  ASC7 C关键是找到$a$,$b$对应的$a+b$hash可以">
+<meta property="og:image" content="https://ooo.0o0.ooo/2016/01/22/56a30dfe00d21.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2016/03/06/56dbd4406895b.png">
+<meta property="og:updated_time" content="2016-09-06T00:36:05.619Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ASC">
+<meta name="twitter:description" content="有事没事更一发(要是没有寒假作业我会堕落至死) CODE (恩。。。本文章一开始是叫寒假作业的。。。)(然后寒假已经过去了。。。。然而我并没有做多少)(所以还是打算继续做。。。。)(然后改名叫ASC)  ASC7 A构造水题0 0…..  ASC7 B无脑直接上线段树，另外吐槽为什么前面交了几发都是MLE，过几个小时交竟然就好了。  ASC7 C关键是找到$a$,$b$对应的$a+b$hash可以">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2016/01/22/56a30dfe00d21.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/01/19/ASC/"/>
+
+
+
+
+
+  <title>ASC | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/19/ASC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ASC</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-19T11:24:47+08:00">
+                2016-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有事没事更一发(要是没有寒假作业我会堕落至死)</p>
+<p><a href="https://github.com/Totoro97/Andrew" target="_blank" rel="external">CODE</a></p>
+<p>(恩。。。本文章一开始是叫寒假作业的。。。)<br>(然后寒假已经过去了。。。。然而我并没有做多少)<br>(所以还是打算继续做。。。。)<br>(然后改名叫ASC)</p>
+<hr>
+<p>ASC7 A<br>构造水题0 0…..</p>
+<hr>
+<p>ASC7 B<br>无脑直接上线段树，另外吐槽为什么前面交了几发都是MLE，过几个小时交竟然就好了。</p>
+<hr>
+<p>ASC7 C<br>关键是找到$a$,$b$对应的$a+b$<br>hash可以$O(1)$<br>总复杂度$O(n^2)$<br>稍微有点卡空间，改成short型就好了</p>
+<hr>
+<p>ASC7 D<br>搜索会TLE<br>虽然是长得奇怪的六边形，后面想了一下还是可以状压DP的。<br>每一层就是一个锯齿样的东西，有锯齿突出为1，没有为0。<br>另外由于对称性，只需要dp前面一半就好了，这样会好写一点。</p>
+<hr>
+<p>ASC7 E<br>题目大意：给定$p,n$,已知$A_i = p^{A_{i-1}}$<br>求$A_i$的极限值</p>
+<p>无非就是要找到一个$b$,使得$b=p^b(mod\ n!)$<br>一开始考虑了$p$和$n!$互质的情况，设$b=p^x$<br>即$p^{p^x} - p^x=0(mod\ n!)$ 即 $(p^{p^x - x}-1)\times p^x=0(mod\ n!)$<br>可以让$p^{p^x-x}\ mod \ n!=1$,由欧拉公式想到$(p^x - x) mod\ phi(n!)=0$<br>是个子问题，可以递归做<br>然而不互质就不会做了，想了下应该是类似的吧。。。发现phi收敛到1的速度是很快的(对数级别)<br>是不是可以直接模拟暴力搞。<br>写了然后tle了。。。java高精度喜闻乐见地坚挺到了第22个测试点。<br>。<br>看题解。<br>得一公式:$a^{phi(n)+b\ mod\ phi(n)}=a^b(mod\ n)$(这公式高中见过两次，我高中OI白搞了)<br>问题就变成：求一个$b&gt;phi(n!)$，使得${p^b}$与${b}$在${phi(n!)}$下同余。<br>子问题，递归。<br>(ps:公式的适用范围:a,n可以不互质,b大于等于phi(n))</p>
+<hr>
+<p>ASC7 F<br>题目大意：求矩形和圆的面积交<br>一开始想了个奇葩的方法：<br>把矩形拆成两个三角形，对于三角形的面积交：<br><img src="https://ooo.0o0.ooo/2016/01/22/56a30dfe00d21.png" alt="2016-01-23 13-20-33屏幕截图.png"><br>可以用(圆的面积-被三条边切掉的面积+每个顶点上应该补回的面积)来算面积交<br>然而后面有一种奇葩的情况(三角形与圆相离)是需要特判的，而且超麻烦..<br>然后就tj了<br>后面想了想。。求多边形的面积是用有向线段与一点的有向面积算的。<br>类比：<br>对于每条有向线段，只需要求有向线段与圆心组成的三角形与圆的有向面积交<br>然后加起来，取绝对值。<br>一条线段的情况就好写多了。(还是有些边界条件有点坑)<br>这种方法可以推广到任意多边形与圆的交</p>
+<hr>
+<p>ASC7 G<br>题目大意：求单位割边的最小割<br>老题了<br>分数规划，二分（比率问题一般都可以这么搞），每次二分后然后跑最小割<br>遇到的问题：<br>这个是我自己傻×：“负边怎么最小割。。。”，竟然还想了好久。。。最后还是看题解。。。<br>尼玛负边直接割掉啊反正是负的</p>
+<p>另外：<br>“网络流一定要加优化！”<br>“网络流一定要加优化！”<br>“网络流一定要加优化！”<br>几百的数据都能把不加优化的dinic卡成翔。</p>
+<hr>
+<p>ASC7 H<br>贪心</p>
+<hr>
+<p>ASC7 I<br>就是求个GCD &amp; JAVA大法好</p>
+<hr>
+<p>ASC8 A</p>
+<hr>
+<p>ASC8 B<br>找规律大法<br>n维空间的答案多项式次数就是n<br>n维空间的前n刀都是$2^k$<br>然后就可以高斯消元求系数了</p>
+<hr>
+<p>ASC8 C<br>提供一个$O(n)$的解法<br>建立后缀自动机<br>考虑后缀自动机每个节点的实质是一个right集合，这个right集合内只有长度最大的那个字符串是满足”left-branching”的，然后我们只需要利用该节点的出度判定这个字符串是不是”right-branching”。</p>
+<hr>
+<p>ASC8 D</p>
+<hr>
+<p>ASC8 E<br>模意义下斐波那契数列的周期，这个是有<a href="http://math.arizona.edu/~ura-reports/071/Campbell.Charles/Final.pdf" target="_blank" rel="external">结论</a>的<br>答案不会很大，bsgs或者按照结论做都可以</p>
+<hr>
+<p>ASC8 F<br>简单dp</p>
+<hr>
+<p>ASC8 G<br>打表找规律</p>
+<hr>
+<p>ASC8 H<br>考虑补图<br>猜个结论：最优解的补图一共有m-1个连通块，且每个联通块都是完全图<br>然后就可以dp求出补图的最少边数</p>
+<hr>
+<p>ASC8 I</p>
+<hr>
+<p>ASC8 J<br>一开始想把红球和彩球的碰撞极角弄出来转化成区间问题，后面发现自己想得太简单了，有一类奇怪的情况处理不了<br>然后就不知道做了<br>然后弃疗乱搞<br>暴力枚举10000个极角，然后判断该角度是否可行。<br>结果过了。。。。<br>(2016-2-29 update) 有更加靠谱的做法，不用枚举10000个角度，只需要枚举所有切线角度和他们中间的某一条角度就ok了。</p>
+<hr>
+<p>ASC9 A<br>码码码！挖挖挖!</p>
+<hr>
+<p>ASC9 B<br>构造题，然而我看了题解。<br>我大概整理一下思路。<br>我一开始也想到拓扑排序了，然而我考虑的是一条边反向拓扑序会发生怎样的变化，然后我智商太低了（或者是根本就木有认真想啊，全扯淡去了），就分析不下去了。<br>考虑在拓扑序中交换相邻的两点（先不考虑重边）：<br>如果他们之间没有边相连，那么这个拓扑序仍然是原图的一个合法的拓扑序。<br>如果他们之间有边，那么这个拓扑序是在原图的基础上的这条边反向的图（仍然是拓扑图！）的一个合法的拓扑序。<br>问题其实是要求我们做这样一个事情：<br>通过交换相邻两点，使得原拓扑序变为目标拓扑序。<br>这里还有点问题：原拓扑序变成目标拓扑序后，图就一定变成目标图了吗？<br>貌似是显然的。。。因为无向图+拓扑序＝一个确定的有向图。。。</p>
+<hr>
+<p>ASC9 C<br>码码码！挖挖挖！</p>
+<hr>
+<p>ASC9 D<br>缩点，然后出度为零的点和入度为零的点是一定要放的，其余的可以随便放。</p>
+<hr>
+<p>ASC9 E<br>模2意义下的多项式的平方就是往中间的系数插0(易证)<br>例如$x = (1,0,1,1)$，则$x^2=(1,0,0,0,1,0,1)$<br>之后高斯消元。</p>
+<hr>
+<p>ASC9 F<br>是我智商低太捉急<br>题目大意是给定一棵树的叶子节点两两之间的距离，判断是否存在这样的树如果有要求恢复。<br>我一开始的思路和题解是差不多的。。。<br>但是我是每次把分支上的所有点都合并成一个点，并以为这样合并后的点仍然是叶子节点。<br>wa了一个下午+一个晚上后才发现这样合并后的点也有可能不是叶子节点。。。<br>例如<br><img src="https://ooo.0o0.ooo/2016/03/06/56dbd4406895b.png" alt="A,C合并到B后的点不是叶子节点"><br>题解上是一个一个合并，也会出现不是叶子节点的情况。<br>不过有一种解决办法：每次找dist最大的点(一定是叶子节点)合并。<br>另外如果每次只是合并1单位长度的话会TLE，因为回复的树的节点个数可能是$O(n^2)$级别的。</p>
+<hr>
+<p>ASC9 G<br>简单贪心</p>
+<hr>
+<p>ASC9 H</p>
+<p>搜索，枚举每个房间放0,2,3,4个一团，剩下的默认1个一团。<br>似乎还是挺快的。。。</p>
+<hr>
+<p>ASC9 I<br>条件:<br>1.每个字母对应的个数相同<br>2.不能交换的字母在两个串中的相对次序要一样。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ACM/" rel="tag"># ACM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/05/CodeForces-334/" rel="next" title="CodeForces_334">
+                <i class="fa fa-chevron-left"></i> CodeForces_334
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/23/辻亚弥乃演唱？！/" rel="prev" title="辻亚弥乃演唱？！">
+                辻亚弥乃演唱？！ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">John Doe</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CodeForces," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="又掉rating了…离红名的目标越来越远…  A B 简单题  C有很多种乱搞的方法.我是先扫一遍看有多少个不和谐的元素,如果不和谐元素个数大于10,则直接输出0然后如果要交换的话i,j中间一定有一个是不和谐的.交换后再判定…其实是挺简单的一道题目,只不过感觉正好卡在了我的智商上,一片脑雾,最开始都没想好怎么写.  D二分答案后网络流判定..然后数据特别坑!会出出现爆int的情况  E先无视1,剩">
+<meta name="keywords" content="CodeForces">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IndiaHacks 2016 - Online Edition (Div. 1 + Div. 2)">
+<meta property="og:url" content="http://yoursite.com/2016/03/22/IndiaHacks-2016-Online-Edition-Div-1-Div-2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="又掉rating了…离红名的目标越来越远…  A B 简单题  C有很多种乱搞的方法.我是先扫一遍看有多少个不和谐的元素,如果不和谐元素个数大于10,则直接输出0然后如果要交换的话i,j中间一定有一个是不和谐的.交换后再判定…其实是挺简单的一道题目,只不过感觉正好卡在了我的智商上,一片脑雾,最开始都没想好怎么写.  D二分答案后网络流判定..然后数据特别坑!会出出现爆int的情况  E先无视1,剩">
+<meta property="og:updated_time" content="2016-03-22T12:06:47.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IndiaHacks 2016 - Online Edition (Div. 1 + Div. 2)">
+<meta name="twitter:description" content="又掉rating了…离红名的目标越来越远…  A B 简单题  C有很多种乱搞的方法.我是先扫一遍看有多少个不和谐的元素,如果不和谐元素个数大于10,则直接输出0然后如果要交换的话i,j中间一定有一个是不和谐的.交换后再判定…其实是挺简单的一道题目,只不过感觉正好卡在了我的智商上,一片脑雾,最开始都没想好怎么写.  D二分答案后网络流判定..然后数据特别坑!会出出现爆int的情况  E先无视1,剩">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/03/22/IndiaHacks-2016-Online-Edition-Div-1-Div-2/"/>
+
+
+
+
+
+  <title>IndiaHacks 2016 - Online Edition (Div. 1 + Div. 2) | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/22/IndiaHacks-2016-Online-Edition-Div-1-Div-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IndiaHacks 2016 - Online Edition (Div. 1 + Div. 2)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-22T19:26:01+08:00">
+                2016-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>又掉rating了…离红名的目标越来越远…</p>
+<hr>
+<p>A B 简单题</p>
+<hr>
+<p>C<br>有很多种乱搞的方法.<br>我是先扫一遍看有多少个不和谐的元素,如果不和谐元素个数大于10,则直接输出0<br>然后如果要交换的话i,j中间一定有一个是不和谐的.<br>交换后再判定…<br>其实是挺简单的一道题目,只不过感觉正好卡在了我的智商上,一片脑雾,最开始都没想好怎么写.</p>
+<hr>
+<p>D<br>二分答案后网络流判定..<br>然后数据特别坑!<br>会出出现爆int的情况</p>
+<hr>
+<p>E<br>先无视1,剩下的能连则连,后面会形成一大坨连通块.<br>之后可以构造解的充要条件还是比较显然的….<br>1.每个连通块都至少要能有一条边连向1.<br>2.连通块的个数&lt;=k.<br>3.1号能连出的边数&gt;=k.<br>需同时满足.<br>然而赛场上没有考虑到条件2…(当然还犯了一些其他奇葩的错误)</p>
+<p>至于怎么搞出那一坨连通块<br>我的做法是利用链表,大概思路是每次合并一个新点后,将该点从全局链表中删去,避免重复合并.</p>
+<hr>
+<p>F<br>很传统的一道题目<br>但是没有想出来…还是看了题解.<br>首先可以利用后缀数组或后缀自动机抠出所有本质不同的子串.<br>之后问题转化成子串$(L,R_1)$到$(L,R_2)$有多少是合法的.<br>这个,数据结构怎么乱搞都行,不过离线弄的话会舒服一点.</p>
+<hr>
+<p>G<br>每个质数单独考虑.<br>对于一个质数p,弄出一个数组A,其中A[i]表示最大的k使得p^k整除原数组中第i个元素.<br>然后对A从小到大排序.<br>然后就变成了经典的建房子问题,此时的答案是$\sum_{i=1}^{n/2} A_{n - i + 1} - A_{i}$<br>也就是说,对于一个选取的子序列,如果它在的那个k排在前面的一半,就去负号,如果在后面一半就去取正号.<br>单独考虑贡献的话<br>于是要求这样一个东西:对于一个长度为n的有序数组和其中的第i个元素,对于其中所有包括i的子序列,有多少种子序列使得i严格在前(后)一半.(记为$f_{n,i}$)<br>以”后”为例…<br>打表发现$f_{n,i}=\sum_{k=0}^{i-2}C(n - 1,k)$…<br>于是可以$O(n)$预处理…<br>有谁可以告诉我这个东西不打表怎么求吗T_T.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CodeForces/" rel="tag"># CodeForces</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/08/CodeForces-345/" rel="next" title="CodeForces_345">
+                <i class="fa fa-chevron-left"></i> CodeForces_345
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/02/GCJ-2015-2014-Round-2/" rel="prev" title="GCJ 2015&2014 Round 2">
+                GCJ 2015&2014 Round 2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <p class="site-author-name" itemprop="name">John Doe</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
