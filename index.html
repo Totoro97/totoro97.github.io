@@ -268,6 +268,249 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://totoro97.github.io/2017/12/21/paper-review-Disconnected-Operation-in-the-Coda-File-System/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Totoro97">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Totoro97">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/21/paper-review-Disconnected-Operation-in-the-Coda-File-System/" itemprop="url">paper review - Disconnected Operation in the Coda File System</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T11:23:36+08:00">
+                2017-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Paper-Review-“Disconnected-Operation-in-the-Coda-File-System”"><a href="#Paper-Review-“Disconnected-Operation-in-the-Coda-File-System”" class="headerlink" title="Paper Review - “Disconnected Operation in the Coda File System”"></a>Paper Review - “Disconnected Operation in the Coda File System”</h1><p>1992</p>
+<h3 id="问题陈述、背景与研究动机"><a href="#问题陈述、背景与研究动机" class="headerlink" title="问题陈述、背景与研究动机"></a>问题陈述、背景与研究动机</h3><p>在分布式文件系统(distributed file system)中，处于断开连接状态的客户端会面临着文件资源不可用的窘境，在意外断开的情况下尤甚。</p>
+<p>在此研究之前，已有较受普及的分布式文件系统NFS(Sun network file system)和AFS(Andrew File System)，但它们连接失败的时候会给用户带来较大的不便。</p>
+<p>文章将此状态下的工作操作称为”disconnect operation”。</p>
+<p>对于离线状态研究的相关工作：</p>
+<p>Cedar file system 提供了不完全(rudimentary)的对disconnect operation的支持，但是没有提供hoarding、reintegration和conflict detection等操作。</p>
+<p>FACE file system使用了称作”stashing”的方法来提供可用性，但是没有cache的同步。</p>
+<p>PCMAIL system较完全地实现了disconnet operation，但是其过于依赖邮件语义(不能推广到文件系统)，而且可移植性较差。</p>
+<p>此研究目标即为提高用户端在离线状态下文件系统的可用性。</p>
+<p>#### </p>
+<h4 id="coda文件系统设计："><a href="#coda文件系统设计：" class="headerlink" title="coda文件系统设计："></a>coda文件系统设计：</h4><h4 id="overview"><a href="#overview" class="headerlink" title="overview:"></a>overview:</h4><p>假设：</p>
+<ul>
+<li>使用环境：少量的可信任的服务器和大量的不可信任的客户端</li>
+<li>客户端机器拥有磁盘等存储设备，并通过网络与服务器连接</li>
+<li>在某些时候，客户段会出现与服务器断开连接的情况</li>
+</ul>
+<p>提供两种机制来保持可用性：</p>
+<ul>
+<li>在线状态下与服务器保持同步</li>
+<li>离线状态下通过合适的设计使得客户端能在一定程度上模拟服务器</li>
+</ul>
+<p>设计框架讨论 &amp; 因此产生的问题：</p>
+<p><img src="https://i.loli.net/2017/12/21/5a3a8dacbea5c.png" alt="2017-12-21 00-19-44屏幕截图.png"></p>
+<ul>
+<li>callback-based coherence</li>
+</ul>
+<ul>
+<li>whole-file caching(简化实现)</li>
+<li>placing of functionality on clients rather than severs.</li>
+<li>一级复制与二级复制</li>
+</ul>
+<h4 id="实现细节："><a href="#实现细节：" class="headerlink" title="实现细节："></a>实现细节：</h4><p>三种状态：hoarding, emulation, reintegration</p>
+<p><img src="https://i.loli.net/2017/12/21/5a3a8d2eab543.png" alt="2017-12-21 00-17-39屏幕截图.png"></p>
+<h5 id="hoarding-囤积-缓存-文件"><a href="#hoarding-囤积-缓存-文件" class="headerlink" title="hoarding - 囤积(缓存)文件:"></a>hoarding - 囤积(缓存)文件:</h5><p>hoarding的策略与可用性息息相关</p>
+<p>难点：</p>
+<ul>
+<li>客户对文件的历史行为(reference behavior)不能(connot)具体预测其未来行为</li>
+<li>连接状态的不可预测(可能意外掉线或重连)</li>
+<li>断线状态下的cache miss代价难以估计</li>
+<li>需要考虑其他客户的行为</li>
+<li>有限大小的cache</li>
+</ul>
+<p>coda的方案：</p>
+<ul>
+<li><p>按优先级划分(Prioritized Cache Management)</p>
+<p>划分依据：</p>
+<ol>
+<li>implicit：用户的历史行为</li>
+<li>explicit：HDB(per-workstation hoard database)</li>
+</ol>
+<p>hoard profiles</p>
+</li>
+<li><p>Hoard Walking</p>
+<p>定义平衡状态(equilibrium)：不存在对象A和B，A的优先级比B高，A在cache中而B不在cache中。</p>
+<p>平衡状态往往会被打破：因此设计Hoard Walking操作，周期性地(文章中周期为10min)维持平衡状态</p>
+<ol>
+<li>reevaluate the name-bindings of HDB entries</li>
+<li>reevaluate the priorities</li>
+<li>fetch and revict</li>
+</ol>
+<p>problem:</p>
+<p>Venus是基于callback break caching的，会出现文件的过期问题。</p>
+<p>妥协方案：一般文件在callback break后立马cache，对于目录文件则不cache。(不优美)</p>
+</li>
+</ul>
+<h5 id="Emulation-模拟服务器"><a href="#Emulation-模拟服务器" class="headerlink" title="Emulation - 模拟服务器"></a>Emulation - 模拟服务器</h5><p>当客户机掉线时，就需要进入emulation状态了。</p>
+<p>Logging</p>
+<p>coda内部实现了一种logging机制，称为replay log，每个replay log entry会记录对应的文件系统调用(e.g. write, open, close)和相应参数(和对象的版本状态)。</p>
+<p>coda采用了一些优化方法来压缩replay log的大小，这对于disconnect状态下的机器是很重要的。</p>
+<ul>
+<li>优化1：注意到coda使用的是whole-file caching，对于 [open, write, write, … , write, close] 这样的操作流，我们不需要分开单独记录，只需要一个”store”即可。</li>
+<li>优化2：当一个新”store”加入时，原来的对于同一个文件的”store”记录可以舍去。</li>
+<li>优化3：考虑系统调用的逻辑关系，当某些特定的系统调用出现时可以舍去之前的被”overwrite”的记录，例如：unlink, truncate</li>
+<li>优化4：考虑互相抵消的操作，此时两个记录都可以舍去，例如rmdir和mkdir的抵消关系。</li>
+</ul>
+<p>单机状态下的persistence：如何应对宕机重启？</p>
+<p>时刻保持cache和相关数据结构保存在非易失性储存器里。</p>
+<p>recoverable virtual memory (RVM)</p>
+<p>Resource Exhaustion：如何应对存储空间不足的情况？</p>
+<p>文章提供了几种未来会探究的方法(并未实现)：</p>
+<ul>
+<li>压缩cache -&gt; 用时间换取空间</li>
+<li>为用户提供撤销的工具</li>
+<li>插个软盘 (“allow portions of the file cache and RVM to be written out to removable media such as floppy disks”)</li>
+</ul>
+<h5 id="Reintegration-重整合"><a href="#Reintegration-重整合" class="headerlink" title="Reintegration - 重整合"></a>Reintegration - 重整合</h5><p>当客户机重新连上网络后，立马进入此状态，进行同步。</p>
+<p>本机coda将replay log发送给AVSG (Accessible Volume Storage Group)，每个server对该replay log进行演绎，并执行相应的操作。</p>
+<ul>
+<li>step1: 解析log，执行事务，给所有对应的文件加锁</li>
+<li>step2: 检验replay log的合法性，例如：冲突检测，磁盘空间检测</li>
+<li>step3: back-fetching</li>
+<li>step4: 提交事务，解锁</li>
+</ul>
+<p>如果replay成功：</p>
+<ul>
+<li>客户端释放replay log</li>
+<li>重新调整优先级</li>
+</ul>
+<p>否则：</p>
+<ul>
+<li>保存现场(打个包)</li>
+</ul>
+<p>细粒度的replay更能节省时间(在此实现中，replay是以volume为单位的)，作者打算利用precedence graph做进一步的优化。</p>
+<p>Conflict Handling</p>
+<p>write/write conflicts</p>
+<p>每个文件的每个版本都会被标注一个唯一的storeid，replay之前会先check被replay的文件的storeid与客户机在disconnect前的storeid相同。</p>
+<p>如果相同：直接replay并update一个新的storeid。</p>
+<p>如果不同：</p>
+<ul>
+<li>对于store记录，直接abort</li>
+<li>……</li>
+</ul>
+<h3 id="检验-amp-测试"><a href="#检验-amp-测试" class="headerlink" title="检验&amp;测试"></a>检验&amp;测试</h3><ol>
+<li>同步耗时测试</li>
+</ol>
+<p><img src="https://i.loli.net/2017/12/20/5a3a7f380b7b9.png" alt="2017-12-20 23-17-15屏幕截图.png"></p>
+<ol>
+<li>缓存大小测试</li>
+</ol>
+<p><img src="https://i.loli.net/2017/12/20/5a3a80c7a3f79.png" alt="2017-12-20 23-24-42屏幕截图.png"></p>
+<p>3.冲突率测试</p>
+<p><img src="https://i.loli.net/2017/12/21/5a3a89f3d1b89.png" alt="2017-12-21 00-03-39屏幕截图.png"></p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>disconnect operation 是一个很简单的想法 (“tantalizingly simple idea”)，但是实现起来有诸多细节需要考虑。</p>
+<p>此工作可以看作是对write-back caching的一种扩展应用。</p>
+<h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://totoro97.github.io/2017/04/05/数据库引论note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1438,145 +1681,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://totoro97.github.io/2016/05/02/GCJ-2015-2014-Round-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Totoro97">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Totoro97">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/05/02/GCJ-2015-2014-Round-2/" itemprop="url">GCJ 2015&2014 Round 2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-02T16:06:04+08:00">
-                2016-05-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2015</p>
-<p>A<br>对于每个有箭头的点,先看该箭头指的方向有没有其它箭头点<br>如果没有,改成一个能够指到其它箭头点的方向<br>如果还是不行就IMPOSSIBLE<br>(其实就是个基环内向树)</p>
-<p>B<br>看了题解.<br>题解对问题进行了转换:不是求每个水管流水的时间,而是假定每个水管的时间相同,但是速度可调(最大速度为原来的v)<br>这两个问题是!一!样!的!<br>转化以后所有的水管可以合成一个水管,即求在水管温度符合要求的前提下流速最大.<br>如何使温度符合要求?贪心,优先调慢温差最大的水管(转化以后是显然的).</p>
-<p>C<br>比较明显的最小割<br>首先每个单词限流(A[i] -&gt; B[i],cap = 1)<br>对于每个句子x,如果有一个单词i,连边x -&gt; A[i], B[i] -&gt; x, cap = INF;<br>对于第一个句子和第二个句子,连边 s -&gt; 1, 2 -&gt; t, cap = INF;<br>最大流即为答案.</p>
-<p>D<br>看了题解.<br><strong>重点是构造,DP只是个工具</strong>.(然而就是构造不出来啊..)<br>总共有5种环绕一圈的方法:<br>3..<br>3..</p>
-<p>2..</p>
-<p>122..<br>122..</p>
-<p>222112..<br>112222..</p>
-<p>2212..<br>1212..<br>1222..</p>
-<p>其中方法2到4两两之间不能相邻,之后dp就好了</p>
-<hr>
-<p>2014</p>
-<p>A<br>贪心,从小到大排序,能塞就塞.</p>
-<p>B<br>按某个要求的顺序排序,可以看成是给每个数赋一个权重,然后按权重从小到大排序.<br>例如一个排列<br>3 4 5 6 1 2<br>对于每个值,权重数组是 5 6 1 2 3 4</p>
-<p>而符合题目条件的排列的权重数组的特点是: 这个值的权重要么比后面的所有值的权重大,要么比后面所有值的权重小.<br>例如符合条件的排列:<br>2 4 6 8 7 5 3 1<br>权重数组: 8 1 7 2 6 3 5 4<br>题目可以转化成:已知初始权重数组,求最小的对换次数,使得若干次兑换后的权重数组符合题目要求.<br>这个是可以贪心的…<br>怎么贪心呢…例如样例:<br>1 8 10 3 7<br>离散化后:　1 4 5 2 3<br>权重: 1 4 5 2 3<br>先看第一个数…权重是1,后面比它大的有4个..比他小的有0个…<br>而两个数需要对换的充要条件是前后的权重的相对大小关系不同…<br>根据目标权重数组的特点,第一个数要么换4次,要么换0次,那就取个min…<br>后面同理.<br>ans = min(4,0) + min(1,2) + min(2,0) + min(1,0) = 1;</p>
-<p>C<br>看到题解上有个”shortest path”就啥都懂了…<br>最大流转最小割转最短路…<br>具体点来说,是两个建筑之间连边,边权是能够八连通这两个建筑所需要的最少的方块的个数.<br>然后最短路就是答案.</p>
-<p>D<br>dp.<br>考虑将整体的trie拆成n个小trie,所有trie上节点之和的最大值.<br>不考虑方案数的话,有个贪心的做法:</p>
-<pre><code>for (int i = 1; i &lt;= N; i++) ans += min(n,num[i]);
-</code></pre><p>其中N是整体trie树的节点个数,num是节点i的重复次数.</p>
-<p>基于上面的贪心,方案数可以用dp解决.<br>f[i]表示将第i个点拆得尽量多的方案数<br>显然当num[i] &lt;\ n时,f[i] = num[i]!.<br>当num[i] &gt; n时,可以枚举子节点的放点情况(这里用组合数),当然只是这样组合数的话会出现没有拆出n个树的情况,这是不优的,不过可以用容斥解决.<br>方案数就是f[root].</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1626,7 +1730,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
