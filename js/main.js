@@ -18,7 +18,7 @@ var prepare = function() {
     // renderer
     renderer = new THREE.WebGLRenderer({antialias:true});
     renderer.setSize(screen_width, screen_height);
-    document.body.appendChild(renderer.domElement);
+    document.getElementById("canvas").appendChild(renderer.domElement);
 
     // camera
     camera = new THREE.PerspectiveCamera(45, screen_width / screen_height, 1, 500);
