@@ -178,5 +178,7 @@ renderer.render(scene, camera);
 
 var coord = new Coord();
 coord.addScene(scene);
-past_time = bg_time = new Date().getTime();
-animate();
+document.getElementById("song").onplay=function() {
+    past_time = bg_time = new Date().getTime();
+    animate();  
+};
