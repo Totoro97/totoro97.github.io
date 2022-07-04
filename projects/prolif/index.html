@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Progressive-connected Light Field Network for Efficient View Synthesis">
+  <meta name="keywords" content="ProLiF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ProLiF</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/icon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Progressively-connected Light Field Network for Efficient View Synthesis</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://nearlyemptystring.com/about">Peng Wang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://liuyuan-pal.github.io/">Yuan Liu</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Guying Lin</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://jiataogu.me/">Jiatao Gu</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://lingjie0206.github.io/">Lingjie Liu</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.cs.hku.hk/index.php/people/academic-staff/taku">Taku Komura</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.cs.hku.hk/people/academic-staff/wenping">Wenping Wang</a><sup>5,1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>The University of Hong Kong,</span>
+            <span class="author-block"><sup>2</sup>Zhejiang University,</span>
+            <span class="author-block"><sup>3</sup>Meta AI,</span>
+            <span class="author-block"><sup>4</sup>Max Planck Institute for Informatics</span>
+            <span class="author-block"><sup>5</sup>Texas A&M University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/xxxx.xxxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/xxxx.xxxxx"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/totoro97/prolif"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <p>
+        We present a compact light field representation, ProLiF, for  efficient photo-realistic novel view synthesis (left). ProLiF has good compatibility with image-level losses such as LPIPS loss to achieve robustness to varying lighting conditions of input images (middle), and CLIP loss for multi-view consistent scene style editing (right).
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            This paper presents a Progressively-connected Light Field network, for the novel view
+            synthesis of complex forward-facing scenes, which allows rendering a large batch of rays
+            in one training step for image- or patch-level losses.
+          </p>
+          <p>
+            Directly learning a neural light field from images has difficulty in rendering novel
+            view images with multi-view consistency due to its unawareness of the underlying 3D
+            geometry.
+          </p>
+          <p>
+            To address this problem, we propose a progressive training scheme and regularization
+            losses to help the neural light field infer the underlying geometry during training,
+            which enforces the multi-view consistency and thus greatly improves the rendering
+            quality. Experiments demonstrate that our method is able to achieve significantly better
+            rendering quality than the baseline neural light fields and comparable results to
+            NeRF-like rendering methods on the challenging LLFF dataset and Shiny Object dataset.
+            Moreover, we demonstrate better compatibility with LPIPS loss to achieve robustness to
+            varying light conditions and CLIP loss to control the rendering style of the scene.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/Wn9pHQiKXvA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper arch. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <img src='./static/images/arch.png'></img>
+        <div class="content has-text-justified">
+          <p>Progressive training scheme. In this training scheme, we first separately predict densities and colors of points with different subnetworks, and then we progressively densify the connections between subnetworks to merge them. At the last training stage, we obtain a single fully-connected MLP to predict all the densities and colors of point samples.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Comparisons</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <video id="comparison" controls autoplay muted loop control height width="100%">
+              <source src="./static/videos/comparison.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <br/>
+
+        <h2 class="title is-3">Applications</h2>
+        <h4 class="title is-4">Scene fitting under varing light conditions</h4>
+        <div class="content has-text-justified">
+          <p>
+            ProLiF is able to robustly fit scenes under varing light conditions using LPIPS loss.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <video id="varing-light" controls autoplay muted loop height width="100%">
+            <source src="./static/videos/varing_light.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <h4 class="title is-4">Text-guided style editing</h4>
+        <div class="content has-text-justified">
+          <p>
+            Using CLIP loss, ProLiF is able to control the scene styles guided by texts.
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <video id="varing-light" controls autoplay muted loop height width="100%">
+            <source src="./static/videos/restyle.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+
+        <h2 class="title is-3">More results</h2>
+        <div class="columns is-vcentered">
+          <div class="column-is-3">
+            <video controls autoplay muted loop height width="100%">
+              <source src="./static/videos/fortress-1m.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column-is-3">
+            <video controls autoplay muted loop height width="100%">
+              <source src="./static/videos/crest-1m.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="columns is-vcentered">
+          <div class="column-is-3">
+            <video controls autoplay muted loop height width="100%">
+              <source src="./static/videos/food-1m.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column-is-3">
+            <video controls autoplay muted loop height width="100%">
+              <source src="./static/videos/seasoning-1m.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="columns is-vcentered">
+          <div class="column-is-3">
+            <video controls autoplay muted loop height width="100%">
+              <source src="./static/videos/giants-1m.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column-is-3">
+            <video controls autoplay muted loop height width="100%">
+              <source src="./static/videos/tools-1m.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="columns is-vcentered">
+          <div class="column-is-3">
+            <video controls autoplay muted loop height width="100%">
+              <source src="./static/videos/fern-1m.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column-is-3">
+            <video controls autoplay muted loop height width="100%">
+              <source src="./static/videos/horns-1m.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Links</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There are some other excellent works that managed to model the neural light fields:
+          </p>
+          <p>
+            <a href="https://arxiv.org/abs/2106.02634">Light Field Networks: Neural Scene Representations with Single-Evaluation Rendering</a>
+            </br>
+            <a href="https://arxiv.org/abs/2112.01523">Learning Neural Light Fields with Ray-Space Embedding Networks</a>
+            </br>
+            <a href="https://arxiv.org/abs/2105.07112">NeuLF: Efficient Novel View Synthesis with Neural 4D Light Field</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{wang2021prolif,
+  author    = {Wang, Peng and Liu, Yuan and Lin, Guying and Gu, Jiatao and Liu, Lingjie and Komura, Taku and Wang, Wenping},
+  title     = {Progressive-connected Light Field Network for Efficient View Synthesis},
+  journal   = {xx},
+  year      = {2022},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            The source code of the website is borrowed from <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
