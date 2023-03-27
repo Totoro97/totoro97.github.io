@@ -73,8 +73,8 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>The University of Hong Kong,</span>
             <span class="author-block"><sup>2</sup>S-Lab, Nanyang Technological University,</span>
-            <span class="author-block"><sup>4</sup>Max Planck Institute for Informatics</span>
-            <span class="author-block"><sup>5</sup>Texas A&M University</span>
+            <span class="author-block"><sup>3</sup>Max Planck Institute for Informatics</span>
+            <span class="author-block"><sup>4</sup>Texas A&M University</span>
             <span class="author-block"><sup>*</sup>Equal contribution</span>
           </div>
 
@@ -116,7 +116,7 @@
                   <span class="icon">
                       <i class="far fa-images"></i>
                   </span>
-                  <span>Data</span>
+                  <span>Data (soon)</span>
                   </a>
             </div>
 
@@ -130,7 +130,10 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src='./static/images/teaser.png'></img>
+      <video id="comparison" controls autoplay muted loop control height width="100%">
+        <source src="./static/videos/teaser.mp4"
+                      type="video/mp4">
+            </video>
     </div>
   </div>
 </section>
@@ -153,13 +156,25 @@
 </section>
 
 <section class="section">
+
   <div class="container is-max-desktop">
+    <!--/ Paper arch. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Framework</h2>
+        <img src='./static/images/pipeline.png'></img>
+        <div class="content has-text-justified">
+          <p>Pipeline of F2-NeRF. (a) Given a large region of interest, we subdivide the space according to the input view frustums. (b) For each sub-region, we construct a perspective warping function based on the visible cameras. The densities and colors are decoded from the scene feature vectors fetched from the same hash table (d) but using different hash functions (c). See the paper for more details. </p>
+        </div>
+      </div>
+    </div>
+
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Comparisons</h2>
         <div class="columns is-centered">
           <div class="column content">
-            <video id="comparison" controls autoplay muted loop control height width="100%">
+            <video id="comparison" controls muted loop control height width="100%">
               <source src="./static/videos/comparison.mp4"
                       type="video/mp4">
             </video>
@@ -174,7 +189,13 @@
         <div class="columns is-centered">
           <div class="column content">
             <video id="comparison" controls muted loop control height width="100%">
-              <source src="./static/videos/result_2.mp4"
+              <source src="./static/videos/result_4.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column content">
+            <video id="comparison" controls muted loop control height width="100%">
+              <source src="./static/videos/result_1.mp4"
                       type="video/mp4">
             </video>
           </div>
@@ -182,7 +203,13 @@
         <div class="columns is-centered">
           <div class="column content">
             <video id="comparison" controls muted loop control height width="100%">
-              <source src="./static/videos/result_1.mp4"
+              <source src="./static/videos/result_3.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column content">
+            <video id="comparison" controls muted loop control height width="100%">
+              <source src="./static/videos/result_2.mp4"
                       type="video/mp4">
             </video>
           </div>
