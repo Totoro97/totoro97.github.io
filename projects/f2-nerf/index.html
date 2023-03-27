@@ -43,9 +43,9 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">F2-NeRF: Fast Neural Radiance Field Training with Free Camera Trajectories</h1>
-          <h1 class="title is-2 publication-conference"> CVPR 2023 (highlight) </h1>
-          <div class="is-size-5 publication-authors">
+          <h1 class="title is-3 publication-title">F2-NeRF: Fast Neural Radiance Field Training with Free Camera Trajectories</h1>
+          <h1 class="title is-4 publication-conference"> CVPR 2023 (highlight) </h1>
+          <div class="is-size-6 publication-authors">
             <span class="author-block">
               <a href="https://nearlyemptystring.com/about">Peng Wang</a><sup>1,2*</sup>,</span>
             <span class="author-block">
@@ -70,7 +70,7 @@
             </span>
           </div>
 
-          <div class="is-size-5 publication-authors">
+          <div class="is-size-6 publication-authors">
             <span class="author-block"><sup>1</sup>The University of Hong Kong,</span>
             <span class="author-block"><sup>2</sup>S-Lab, Nanyang Technological University,</span>
             <span class="author-block"><sup>3</sup>Max Planck Institute for Informatics</span>
@@ -143,7 +143,7 @@
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 class="title is-4">Abstract</h2>
         <div class="content has-text-justified">
           <p>
             This paper presents a novel grid-based NeRF called F2-NeRF (Fast-Free-NeRF) for novel view synthesis, which enables arbitrary input camera trajectories and only costs a few minutes for training. Existing fast grid-based NeRF training frameworks, like Instant-NGP, Plenoxels, DVGO, or TensoRF, are mainly designed for bounded scenes and rely on space warping to handle unbounded scenes. Existing two widely-used space-warping methods are only designed for the forward-facing trajectory or the 360 degree object-centric trajectory but cannot process arbitrary trajectories. In this paper, we delve deep into the mechanism of space warping to handle unbounded scenes. Based on our analysis, we further propose a novel space-warping method called perspective warping, which allows us to handle arbitrary trajectories in the grid-based NeRF framework. Extensive experiments demonstrate that \ourmethod is able to use the same perspective warping to render high-quality images on two standard datasets and a new free trajectory dataset collected by us.
@@ -161,7 +161,7 @@
     <!--/ Paper arch. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Framework</h2>
+        <h2 class="title is-4">Framework</h2>
         <img src='./static/images/pipeline.png'></img>
         <div class="content has-text-justified">
           <p>Pipeline of F2-NeRF. (a) Given a large region of interest, we subdivide the space according to the input view frustums. (b) For each sub-region, we construct a perspective warping function based on the visible cameras. The densities and colors are decoded from the scene feature vectors fetched from the same hash table (d) but using different hash functions (c). See the paper for more details. </p>
@@ -171,7 +171,7 @@
 
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Comparisons</h2>
+        <h2 class="title is-4">Comparisons</h2>
         <div class="columns is-centered">
           <div class="column content">
             <video id="comparison" controls muted loop control height width="100%">
@@ -185,7 +185,10 @@
 
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">More results</h2>
+        <h2 class="title is-4">More results</h2>
+        <div class="content is-centered has-text-centered">
+          <p>F2-NeRF can be trained using trajectories with different patterns.</p>
+        </div>
         <div class="columns is-centered">
           <div class="column content">
             <video id="comparison" controls muted loop control height width="100%">
@@ -214,32 +217,34 @@
             </video>
           </div>
         </div>
+        <div class="columns is-centered">
+          <div class="column content">
+            <video id="comparison" controls muted loop control height width="100%">
+              <source src="./static/videos/result_5.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column content">
+            <video id="comparison" controls muted loop control height width="100%">
+              <source src="./static/videos/result_6.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
       </div>
     </div>
 
 
-    <!-- Concurrent Work. -->
-    <!--
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
-
+        <h2 class="title is-4">Acknowledgement</h2>
         <div class="content has-text-justified">
           <p>
-            There are some other excellent works that managed to model the neural light fields:
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2106.02634">Light Field Networks: Neural Scene Representations with Single-Evaluation Rendering</a>
-            </br>
-            <a href="https://arxiv.org/abs/2112.01523">Learning Neural Light Fields with Ray-Space Embedding Networks</a>
-            </br>
-            <a href="https://arxiv.org/abs/2105.07112">NeuLF: Efficient Novel View Synthesis with Neural 4D Light Field</a>
+            This study is supported by the Ministry of Education, Singapore, under its MOE AcRF Tier 2 (MOE-T2EP20221-0012), NTU NAP, and under the RIE2020 Industry Alignment Fund – Industry Collaboration Projects (IAF-ICP) Funding Initiative, as well as cash and in-kind contribution from the industry partner(s). Lingjie Liu and Christian Theobalt have been supported by the ERC Consolidator Grant 4DReply (770784).
           </p>
         </div>
       </div>
     </div>
-    -->
-    <!--/ Concurrent Work. -->
 
   </div>
 </section>
@@ -248,12 +253,11 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{wang2022progressively,
+    <pre><code>@article{wang2023f2nerf,
   title={F2-NeRF: Fast Neural Radiance Field Training with Free Camera Trajectories},
   author={Wang, Peng and Liu, Yuan and Chen, Zhaoxi and Liu, Lingjie and Liu, Ziwei and Komura, Taku and Theobalt, Christian and Wang, Wenping},
-  journal={arXiv preprint arXiv:xxxx.xxxxx},
+  journal={CVPR},
   year={2023}
-}
 }</code></pre>
   </div>
 </section>
