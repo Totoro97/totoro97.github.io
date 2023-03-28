@@ -111,7 +111,7 @@
               </span>
               <!-- Dataset Link. -->
               <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                <a href="https://github.com/totoro97/f2-nerf"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="far fa-images"></i>
@@ -133,7 +133,9 @@
       <video id="comparison" controls autoplay muted loop control height width="100%">
         <source src="./static/videos/teaser.mp4"
                       type="video/mp4">
-            </video>
+      </video>
+      <div class="content has-text-centered">
+      </div>
     </div>
   </div>
 </section>
@@ -146,7 +148,7 @@
         <h2 class="title is-4">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            This paper presents a novel grid-based NeRF called F2-NeRF (Fast-Free-NeRF) for novel view synthesis, which enables arbitrary input camera trajectories and only costs a few minutes for training. Existing fast grid-based NeRF training frameworks, like Instant-NGP, Plenoxels, DVGO, or TensoRF, are mainly designed for bounded scenes and rely on space warping to handle unbounded scenes. Existing two widely-used space-warping methods are only designed for the forward-facing trajectory or the 360 degree object-centric trajectory but cannot process arbitrary trajectories. In this paper, we delve deep into the mechanism of space warping to handle unbounded scenes. Based on our analysis, we further propose a novel space-warping method called perspective warping, which allows us to handle arbitrary trajectories in the grid-based NeRF framework. Extensive experiments demonstrate that \ourmethod is able to use the same perspective warping to render high-quality images on two standard datasets and a new free trajectory dataset collected by us.
+            This paper presents a novel grid-based NeRF called F2-NeRF (Fast-Free-NeRF) for novel view synthesis, which enables arbitrary input camera trajectories and only costs a few minutes for training. Existing fast grid-based NeRF training frameworks, like Instant-NGP, Plenoxels, DVGO, or TensoRF, are mainly designed for bounded scenes and rely on space warping to handle unbounded scenes. Existing two widely-used space-warping methods are only designed for the forward-facing trajectory or the 360 degree object-centric trajectory but cannot process arbitrary trajectories. In this paper, we delve deep into the mechanism of space warping to handle unbounded scenes. Based on our analysis, we further propose a novel space-warping method called perspective warping, which allows us to handle arbitrary trajectories in the grid-based NeRF framework. Extensive experiments demonstrate that F2-NeRF is able to use the same perspective warping to render high-quality images on two standard datasets and a new free trajectory dataset collected by us.
           </p>
         </div>
       </div>
@@ -231,6 +233,20 @@
             </video>
           </div>
         </div>
+        <div class="columns is-centered">
+          <div class="column content">
+            <video id="comparison" controls muted loop control height width="100%">
+              <source src="./static/videos/result_7.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div class="column content">
+            <video id="comparison" controls muted loop control height width="100%">
+              <source src="./static/videos/result_8.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -240,7 +256,7 @@
         <h2 class="title is-4">Acknowledgement</h2>
         <div class="content has-text-justified">
           <p>
-            This study is supported by the Ministry of Education, Singapore, under its MOE AcRF Tier 2 (MOE-T2EP20221-0012), NTU NAP, and under the RIE2020 Industry Alignment Fund – Industry Collaboration Projects (IAF-ICP) Funding Initiative, as well as cash and in-kind contribution from the industry partner(s). Lingjie Liu and Christian Theobalt have been supported by the ERC Consolidator Grant 4DReply (770784).
+            This study is supported by the Ministry of Education, Singapore, under its MOE AcRF Tier 2 (MOE-T2EP20221-0012), NTU NAP, and under the RIE2020 Industry Alignment Fund – Industry Collaboration Projects (IAF-ICP) Funding Initiative, as well as cash and in-kind contribution from the industry partner(s). Lingjie Liu and Christian Theobalt have been supported by the ERC Consolidator Grant 4DReply (770784). Peng Wang is supported by Hong Kong PhD Fellowship Scheme.
           </p>
         </div>
       </div>
